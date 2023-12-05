@@ -1,0 +1,63 @@
+from time import sleep
+
+current_balance = 0
+
+
+def account_new():
+    print(' wellcome to Yes bank ✔️ .\n Your currently in account creation page.\n Kindly fill your details ')
+    print(' ')
+    name = str(input('Enter your full name ; '))
+    age = int(input('Enter your age ; '))
+    address = input('Enter your address ; ')
+    phone_number = int(input('Enter your phone number ; '))
+
+    if age < 18:
+        print('you are not allowed to create bank account \n your age should be >18')
+    else:
+        print('please wait your account is being created...')
+        sleep(3)
+
+        print('your account is created')
+        print('To know your account details press 1\n to withdraw money from your account press 2\n')
+        code = int(input('Enter "1" to know your details'))
+
+    if code == 1:
+        print('Account number= 234', phone_number, '876')
+        print('Name= ', name)
+        print("age= ", age)
+        print("phone number= ", phone_number)
+
+        print('Address= ', address)
+        
+
+
+
+
+def deposit():
+    action=int(input("action"))
+    if action == 2:
+        global current_balance
+
+        current_balance = 12000
+        amount = float(input('Please enter the amount to be deposited: '))
+        current_balance = amount + current_balance
+        print('please wait your transaction is being in process')
+        sleep(1.5)
+        print('Almost done')
+        sleep(1)
+        print('your transaction is successful')
+        print('Balance= ', current_balance)
+
+
+    if action==3:
+
+
+        d = input('Enter the amount to be withdrawal')
+        d = float(d)
+        k = current_balance-d
+        print(k)
+
+
+account_new()
+deposit()
+
