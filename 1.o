@@ -1,63 +1,71 @@
 from time import sleep
 
-current_balance = 0
+current_balance = 0  # Global balance
 
 
 def account_new():
-    print(' wellcome to Yes bank ✔️ .\n Your currently in account creation page.\n Kindly fill your details ')
-    print(' ')
-    name = str(input('Enter your full name ; '))
-    age = int(input('Enter your age ; '))
-    address = input('Enter your address ; ')
-    phone_number = int(input('Enter your phone number ; '))
+    print('Welcome to Yes Bank ✔️.\nYou are currently on the account creation page.\nKindly fill in your details.\n')
+    
+    name = input('Enter your full name: ')
+    age = int(input('Enter your age: '))
+    address = input('Enter your address: ')
+    phone_number = int(input('Enter your phone number: '))
 
     if age < 18:
-        print('you are not allowed to create bank account \n your age should be >18')
+        print('You are not allowed to create a bank account.\nYour age should be 18 or older.')
+        return
     else:
-        print('please wait your account is being created...')
-        sleep(3)
+        print('Please wait, your account is being created...')
+        sleep(2)
 
-        print('your account is created')
-        print('To know your account details press 1\n to withdraw money from your account press 2\n')
-        code = int(input('Enter "1" to know your details'))
+        print('\n🎉 Your account has been created successfully! 🎉')
+        print('\nTo know your account details, press 1')
+        print('To proceed with transactions, press 2')
 
-    if code == 1:
-        print('Account number= 234', phone_number, '876')
-        print('Name= ', name)
-        print("age= ", age)
-        print("phone number= ", phone_number)
+        code = int(input('Enter your choice (1 or 2): '))
 
-        print('Address= ', address)
-        
-
-
+        if code == 1:
+            print('\n--- Account Details ---')
+            print(f'Account Number: 234{phone_number}876')
+            print(f'Name: {name}')
+            print(f'Age: {age}')
+            print(f'Phone Number: {phone_number}')
+            print(f'Address: {address}')
+        elif code == 2:
+            deposit()
+        else:
+            print("Invalid input. Exiting.")
 
 
 def deposit():
-    action=int(input("action"))
+    global current_balance
+    current_balance = 12000  # Initial balance
+
+    print('\n--- Transaction Menu ---')
+    print('2: Deposit Money')
+    print('3: Withdraw Money')
+
+    action = int(input('Enter your action: '))
+
     if action == 2:
-        global current_balance
-
-        current_balance = 12000
-        amount = float(input('Please enter the amount to be deposited: '))
-        current_balance = amount + current_balance
-        print('please wait your transaction is being in process')
+        amount = float(input('Please enter the amount to deposit: '))
+        print('Please wait, your transaction is being processed...')
         sleep(1.5)
-        print('Almost done')
-        sleep(1)
-        print('your transaction is successful')
-        print('Balance= ', current_balance)
+        current_balance += amount
+        print('✅ Transaction successful.')
+        print('Current Balance: ₹', current_balance)
 
+    elif action == 3:
+        amount = float(input('Enter the amount to withdraw: '))
 
-    if action==3:
+        if amount > current_balance:
+            print("❌ Insufficient balance.")
+        else:
+            current_balance -= amount
+            print('✅ Withdrawal successful.')
+            print('Remaining Balance: ₹', current_balance)
 
-
-        d = input('Enter the amount to be withdrawal')
-        d = float(d)
-        k = current_balance-d
-        print(k)
-
+    else:
+        print("Invalid action.")
 
 account_new()
-deposit()
-
